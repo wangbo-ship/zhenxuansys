@@ -1,6 +1,7 @@
-# note文档
+# 笔记文档
 
-# 配置
+# 项目配置
+
 - git push时 443:Timed out ---尝试cmd ipconfig /flushdns 刷新DNS
 
 - eslint配置 ---针对js的语法检测工具
@@ -30,15 +31,21 @@
     - "build:pro": "vue-tsc && vite build --mode production",
 
 - 集成SVG 在项目中svg矢量图几乎不占用资源
+
   - 保存svg图片后可以封装一个svg组件 在需要用到的地方引入传参即可
   - 本项目封装在 components/SvgIcon/index.vue
 
 - 统一注册全局组件
+
   - main.ts中可Vue.component()注册全局组件 但随着全局组件的增多 统一注册更为合理
-  - 本项目中 components存放全局组件 components/index.ts运用自定义插件 统一注册全局组件 自定义插件的install方法第一个参数是vm 方法体内部可以注册全局组件、全局指令，V2中还可以注册全局过滤器、全局混入等
+  - 本项目中 components存放全局组件 components/index.ts运用自定义插件（应用场景：全局注册） 自定义插件的install方法第一个参数是vm 方法体内部可以注册全局组件、全局指令，V2中还可以注册全局过滤器、全局混入等
   - 也可以使用"withInstall"方法。这个方法通常是一个工厂函数，接受一个Vue组件作为参数，并返回一个新的Vue组件，这个新的组件会自动注册到Vue实例中。
 
-- 集成sass
-  - 
-  -
-  -
+- 集成scss ---本项目styles文件夹中集成了scss全局样式
+  - Sass和Scss都具有相同的功能和特性，只是语法格式不同
+  - Sass使用的是缩进式语法 
+  - Scss使用了大括号 {} 和分号 ; 来标记代码块和属性
+
+
+
+

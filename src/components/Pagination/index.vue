@@ -6,15 +6,9 @@
  * @Description: 分页器组件
 -->
 <template>
-     <div>
-      分页器组件
-    </div>
+  <div>分页器组件</div>
 </template>
 
-<script lang = 'ts' setup>
+<script lang="ts" setup></script>
 
-</script>
- 
-<style scoped>
-    
-</style>
+<style scoped></style>
