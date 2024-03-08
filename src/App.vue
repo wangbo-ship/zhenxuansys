@@ -9,11 +9,13 @@
   <div>
     <el-button type="primary" size="default" :icon="Plus">aaa</el-button>
     <el-button type="primary" size="default" :icon="Edit">aaa</el-button>
+    <svg-icon name="home" color="pink" width="100px" height="100px"></svg-icon>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Plus, Edit } from '@element-plus/icons-vue'
+import { Plus, Edit } from '@element-plus/icons-vue';
+import SvgIcon from '@/components/SvgIcon/index.vue';
 </script>
 
 <style scoped></style>
