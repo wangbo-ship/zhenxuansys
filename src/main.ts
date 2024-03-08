@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-08 01:41:59
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-08 20:37:46
+ * @LastEditTime: 2024-03-08 21:01:04
  * @Description: https://github.com/wangbo-ship/zhenxuansys
  */
 import { createApp } from 'vue'
@@ -25,9 +25,12 @@ app.use(ElementPlus, {
 //svg插件所需的配置代码
 import 'virtual:svg-icons-register'
 
-//引入并安装(use)自定义插件对象：注册整个项目全局组件 
+//引入并安装(use)自定义插件对象：注册整个项目全局组件
 import globalComponent from '@/components/index';
 app.use(globalComponent);
+
+//引入模板的全局样式
+import '@/styles/index.scss'
 
 //挂载
 app.mount('#app')

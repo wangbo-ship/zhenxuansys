@@ -34,7 +34,11 @@
   - 本项目封装在 components/SvgIcon/index.vue
 
 - 统一注册全局组件
-  - main.ts中可Vue.component()注册全局组件 但随着全局组件的增多 统一注册更为合理 
+  - main.ts中可Vue.component()注册全局组件 但随着全局组件的增多 统一注册更为合理
   - 本项目中 components存放全局组件 components/index.ts运用自定义插件 统一注册全局组件 自定义插件的install方法第一个参数是vm 方法体内部可以注册全局组件、全局指令，V2中还可以注册全局过滤器、全局混入等
   - 也可以使用"withInstall"方法。这个方法通常是一个工厂函数，接受一个Vue组件作为参数，并返回一个新的Vue组件，这个新的组件会自动注册到Vue实例中。
 
+- 集成sass
+  - 
+  -
+  -

@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-08 20:28:04
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-08 20:50:58
+ * @LastEditTime: 2024-03-08 21:00:42
  * @Description: 注册所有的全局组件
  */
 
