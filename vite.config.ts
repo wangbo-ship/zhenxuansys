@@ -11,13 +11,14 @@ import path from 'path'
 //引入svg需要的插件
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 export default defineConfig({
-  plugins: [vue(),
+  plugins: [
+    vue(),
     createSvgIconsPlugin({
       // svg存放位置
       iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
       // Specify symbolId format
       symbolId: 'icon-[dir]-[name]',
-    })
+    }),
   ],
   resolve: {
     alias: {

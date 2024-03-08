@@ -1,5 +1,6 @@
 # note文档
 
+# 配置
 - git push时 443:Timed out ---尝试cmd ipconfig /flushdns 刷新DNS
 
 - eslint配置 ---针对js的语法检测工具
@@ -18,17 +19,22 @@
 - 使用elementplus国际化 注意打包问题 @ts-ignore消除ts检测才能正常build
 
 - 环境变量的配置 ---不同阶断对应的接口和服务器往往不同 配置环境变量方便开发中切换
+
   - development 开发环境 .env.development
   - testing 测试环境 .env.test
   - production 生产环境 .env.production
-  在不同环境的配置文件中 定义相应的配置变量 变量必须以 VITE_ 为前缀才能暴露给外部读取
+    在不同环境的配置文件中 定义相应的配置变量 变量必须以 VITE_ 为前缀才能暴露给外部读取
   - 通过 import.meta.env 获取环境变量
   - 在package.json中添加配置运行命令
     - "build:test": "vue-tsc && vite build --mode test",
     - "build:pro": "vue-tsc && vite build --mode production",
 
-- 集成SVG 在项目中svg矢量图几乎不占用资源 
+- 集成SVG 在项目中svg矢量图几乎不占用资源
   - 保存svg图片后可以封装一个svg组件 在需要用到的地方引入传参即可
-  - 本项目封装在components/SvgIcon/index.vue
+  - 本项目封装在 components/SvgIcon/index.vue
 
+- 统一注册全局组件
+  - main.ts中可Vue.component()注册全局组件 但随着全局组件的增多 统一注册更为合理 
+  - 本项目中 components存放全局组件 components/index.ts运用自定义插件 统一注册全局组件 自定义插件的install方法第一个参数是vm 方法体内部可以注册全局组件、全局指令，V2中还可以注册全局过滤器、全局混入等
+  - 也可以使用"withInstall"方法。这个方法通常是一个工厂函数，接受一个Vue组件作为参数，并返回一个新的Vue组件，这个新的组件会自动注册到Vue实例中。
 
