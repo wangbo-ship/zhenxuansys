@@ -13,9 +13,7 @@
 </template>
 
 <script setup lang="ts">
- import {Plus,Edit} from '@element-plus/icons-vue'
+import { Plus, Edit } from '@element-plus/icons-vue'
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

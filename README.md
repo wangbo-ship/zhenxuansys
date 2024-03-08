@@ -10,10 +10,11 @@
 
 - husky配置 ---强制按照规范来提交 husky在代码提交之前触发 git在客户端配置的钩子
 
-- commitlint配置 ---远程提交规范配置 在提交远程时自动执行husky配置 
-                ---eg：git commit -m "feat: 配置commitlint"
+- commitlint配置 ---远程提交规范配置 在提交远程时自动执行husky配置
+  ---eg：git commit -m "feat: 配置commitlint"
 
 - scripts/preinstall配置 ---统一包管理工具 可以保证下载依赖版本统一 本项目统一pnpm
 
 - 使用elementplus国际化 注意打包问题 @ts-ignore消除ts检测才能正常build
-  
+
+
