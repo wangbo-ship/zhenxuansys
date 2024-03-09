@@ -12,7 +12,7 @@ import path from 'path'
 import { viteMockServe } from 'vite-plugin-mock'
 //引入svg需要的插件
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-export default defineConfig(({command})=>{
+export default defineConfig(({ command }) => {
   return {
     plugins: [
       vue(),
@@ -23,8 +23,8 @@ export default defineConfig(({command})=>{
         symbolId: 'icon-[dir]-[name]',
       }),
       viteMockServe({
-        enable: command === 'serve',  //保证开发阶断可以使用mock接口
-      } ),
+        enable: command === 'serve', //保证开发阶断可以使用mock接口
+      }),
     ],
     resolve: {
       alias: {

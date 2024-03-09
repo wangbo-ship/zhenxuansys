@@ -32,19 +32,7 @@ app.use(globalComponent)
 //引入模板的全局样式
 import '@/styles/index.scss'
 
-import axios from 'axios'
-axios({
-    url:'/api/user/login',
-    method:'post',
-    data:{
-        username:'admin',
-        password:'111111'
-    }
-}).then(res=>{
-    console.log(res)
-}).catch(err=>{
-    console.log(err)
-})
+
 
 //挂载
 app.mount('#app')

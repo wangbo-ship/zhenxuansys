@@ -24,7 +24,7 @@
   - development 开发环境 .env.development
   - testing 测试环境 .env.test
   - production 生产环境 .env.production
-    在不同环境的配置文件中 定义相应的配置变量 变量必须以 VITE_ 为前缀才能暴露给外部读取
+    在不同环境的配置文件中 定义相应的配置变量 变量必须以 VITE\_ 为前缀才能暴露给外部读取
   - 通过 import.meta.env 获取环境变量
   - 在package.json中添加配置运行命令
     - "build:test": "vue-tsc && vite build --mode test",
@@ -42,8 +42,11 @@
   - 也可以使用"withInstall"方法。这个方法通常是一个工厂函数，接受一个Vue组件作为参数，并返回一个新的Vue组件，这个新的组件会自动注册到Vue实例中。
 
 - 集成scss ---本项目styles文件夹中集成了scss全局样式
+
   - Sass和Scss都具有相同的功能和特性，只是语法格式不同
   - Sass使用的是缩进式语法
   - Scss使用了大括号 {} 和分号 ; 来标记代码块和属性
 
 - 集成mock接口测试 ---官网下载mock插件后按要求在vite.config.ts中配置 可使用mock文件夹下的测试接口
+
+- axios二次封装 主要是为了添加请求和相应拦截器 常用的工具性文件一般放utils
