@@ -21,8 +21,8 @@ import { Plus, Edit } from '@element-plus/icons-vue'
 
 <style scoped lang="scss">
 #testColor {
-   width: 100px;
-   height:100px;
-   background-color:$base-color;
-  }
+  width: 100px;
+  height: 100px;
+  background-color: $base-color;
+}
 </style>
