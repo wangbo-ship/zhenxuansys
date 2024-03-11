@@ -32,7 +32,5 @@ app.use(globalComponent)
 //引入模板的全局样式
 import '@/styles/index.scss'
 
-
-
 //挂载
 app.mount('#app')

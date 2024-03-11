@@ -1,8 +1,9 @@
 # 笔记文档
-
+- git push时 443:Timed out或者 OpenSSL SSL_read: Connection was reset, errno 10054
+  - 尝试cmd ipconfig /flushdns 刷新DNS 或者如下再push
+    - git config --global https.proxy 127.0.0.1:本机vpn端口
+    - git config --global http.proxy 127.0.0.1:本机vpn端口
 # 项目配置
-
-- git push时 443:Timed out ---尝试cmd ipconfig /flushdns 刷新DNS
 
 - eslint配置 ---针对js的语法检测工具
 
@@ -50,3 +51,5 @@
 - 集成mock接口测试 ---官网下载mock插件后按要求在vite.config.ts中配置 可使用mock文件夹下的测试接口
 
 - axios二次封装 主要是为了添加请求和相应拦截器 常用的工具性文件一般放utils
+
+- API接口统一管理  api文件夹下 根据不同业务建立不同文件夹分别管理
