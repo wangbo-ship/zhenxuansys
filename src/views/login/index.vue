@@ -9,16 +9,19 @@
           :style="{
             boxShadow: `var(${getCssVarName('light')})`,
           }"
+          :model="loginForm"
+          ref="loginForms"
+          :rules="rules"
         >
           <h1>Welcome</h1>
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input
               :prefix-icon="User"
               v-model="loginForm.username"
               @keyup.enter="login()"
             ></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input
               type="password"
               :prefix-icon="Lock"
@@ -59,8 +62,15 @@ let $router = useRouter()
 let loginForm = reactive({ username: 'admin', password: '111111' })
 //按钮加载变量
 let loading = ref(false)
+//获取表单组件el-form
+let loginForms = ref()
 //登录请求
 const login = async () => {
+  //保证全部表单相校验通过再发请求
+  // validate方法接收一个回调函数 或者 返回一个promise
+  // 通过校验则返回成功promis 否则返回失败promise
+  await loginForms.value.validate()
+  //登录按钮加载效果:开始加载
   loading.value = true
   try {
     //登陆成功
@@ -81,6 +91,44 @@ const login = async () => {
   }
 }
 
+//自定义校验规则函数
+const validatorUserName = (_rule: any, value: any, callback: any) => {
+  //rule:即为校验规则对象
+  //value:即为表单元素文本内容
+  //函数:如果符合条件callBack放行通过即为
+  //如果不符合条件callBack方法,注入错误提示信息
+  if (value.length >= 5) { //可以写成正则校验if(/^\d{5,10}$/.test(value))
+    callback()
+  } else {
+    callback(new Error('账号长度至少五位'))
+  }
+}
+//这里的rule前加下划线 表示无用参数_rule
+const validatorPassword = (_rule: any, value: any, callback: any) => {
+  if (value.length >= 6) {
+    callback()
+  } else {
+    callback(new Error('密码长度至少六位'))
+  }
+}
+
+//定义表单校验需要配置对象
+const rules = {
+  //规则对象属性:
+  //required,代表这个字段务必要校验的
+  //min:文本长度至少多少位
+  //max:文本长度最多多少位
+  //message:错误的提示信息
+  //trigger:触发校验表单的时机 change->文本发生变化触发校验,blur:失去焦点的时候触发校验规则
+  username: [
+    // { required: true, min: 6, max: 10, message: '账号长度至少六位', trigger: 'change' }
+    {required: true, trigger: 'change', validator: validatorUserName },
+  ],
+  password: [
+    // { required: true, min: 6, max: 15, message: '密码长度至少6位', trigger: 'change' }
+    {required: true, trigger: 'change', validator: validatorPassword },
+  ],
+}
 // form盒子阴影
 const getCssVarName = (type: string) => {
   return `--el-box-shadow${type ? '-' : ''}${type}`
