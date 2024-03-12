@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-08 20:28:04
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-08 21:00:42
+ * @LastEditTime: 2024-03-11 15:14:00
  * @Description: 注册所有的全局组件
  */
 
@@ -10,11 +10,11 @@
 import SvgIcon from './SvgIcon/index.vue'
 import Pagination from './Pagination/index.vue'
 // import Category from './Category/index.vue'
-
+import Test from './Test/index.vue'
 //引入element-plus提供全部图标组件
 // import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
-const allGlobalComponent: any = { SvgIcon, Pagination }
+const allGlobalComponent: any = { SvgIcon, Pagination,Test }
 
 //对外暴露插件对象
 export default {
