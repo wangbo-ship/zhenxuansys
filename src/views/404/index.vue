@@ -20,7 +20,7 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image:url('../../assets/images/error_images/404.png');
+  background-image: url('../../assets/images/error_images/404.png');
   background-repeat: no-repeat; /* 禁止背景图重复 */
   background-position: center; /* 将背景图水平垂直居中 */
 }
