@@ -1,3 +1,10 @@
+<!--
+ * @Author: wangbo
+ * @Date: 2024-03-08 01:41:59
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2024-03-12 19:13:55
+ * @Description: https://github.com/wangbo-ship/zhenxuansys
+-->
 # 笔记文档
 
 - git push时 443:Timed out或者 OpenSSL SSL_read: Connection was reset, errno 10054
@@ -52,10 +59,9 @@
 
 - 集成mock接口测试 ---官网下载mock插件后按要求在vite.config.ts中配置 可使用mock文件夹下的测试接口
 
-- axios二次封装 主要是为了添加请求和相应拦截器 常用的工具性文件一般放utils
+- axios二次封装 主要是为了添加请求和相应拦截器 常用的工具性文件一般放utils (utils中一般存公共的方法--全局方法、二次封装等)
 
 - API接口统一管理 api文件夹下 根据不同业务建立不同文件夹分别管理
 
 # 项目
 
-- 配置路由 src/router/index.ts

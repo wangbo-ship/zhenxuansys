@@ -50,6 +50,7 @@ import { ElNotification } from 'element-plus'
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import useUserStore from '@/store/modules/user'
+import { getTime } from '@/utils/time'
 //user仓库
 let userStore = useUserStore()
 //router
@@ -68,7 +69,7 @@ const login = async () => {
     $router.push('/')
     ElNotification({
       type: 'success',
-      message: '登陆成功',
+      message: `${getTime()}好`,
     })
   } catch (error) {
     loading.value = false
