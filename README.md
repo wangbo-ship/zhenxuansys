@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-08 01:41:59
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-12 19:13:55
+ * @LastEditTime: 2024-03-14 16:27:33
  * @Description: https://github.com/wangbo-ship/zhenxuansys
 -->
 
@@ -65,3 +65,4 @@
 - API接口统一管理 api文件夹下 根据不同业务建立不同文件夹分别管理
 
 # 项目
+- 登陆后左侧菜单组件用到了递归组件:根据路由表递归生成 

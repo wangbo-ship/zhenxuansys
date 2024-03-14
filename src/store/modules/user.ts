@@ -7,6 +7,8 @@ import type { loginForm, loginResponseData } from '@/api/user/type'
 import type { UserState } from './types/type'
 //引入utils中存储数据的方法
 import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
+//引入路由
+import { constantRoute } from '@/router/routes'
 //创建小仓库
 let useUserStore = defineStore('User', {
   //存储
@@ -14,6 +16,8 @@ let useUserStore = defineStore('User', {
     return {
       // token: localStorage.getItem('TOKEN'),
       token: GET_TOKEN(),
+      //路由表
+      menuRoutes: constantRoute, //type.ts中定义了对应的路由对象的类型
     }
   },
   //异步 逻辑
