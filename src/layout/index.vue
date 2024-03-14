@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-13 16:27:48
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-14 19:20:14
+ * @LastEditTime: 2024-03-14 21:46:30
  * @Description: layout大框架
 -->
 <template>
@@ -17,7 +17,7 @@
         <el-menu
           background-color="rgb(52, 56, 60)"
           text-color="white"
-          :default-active="activeIndex"
+          :default-active="$route.path"
           active-text-color="#ffd04b"
         >
           <Menu :menuList="userStore.menuRoutes"></Menu>
@@ -25,7 +25,9 @@
       </el-scrollbar>
     </div>
     <!-- 头部导航 -->
-    <div class="layout_tabbar">123</div>
+    <div class="layout_tabbar">
+      <Tabbar></Tabbar>
+    </div>
     <!-- 展示区 -->
     <div class="layout_main">
       <Main></Main>
@@ -38,9 +40,10 @@
 import Logo from './logo/index.vue'
 import Menu from './menu/index.vue'
 import Main from './main/index.vue'
-//默认首页高亮
-import { ref } from 'vue'
-const activeIndex = ref('/home')
+import Tabbar from './tabbar/index.vue'
+//高亮用当前路由显示 route获取当前路由信息 :default-active="$route.path"刷新时依旧停留在当前路由
+import {useRoute} from 'vue-router'
+let $route = new useRoute()
 //获取用户仓库
 import useUserStore from '@/store/modules/user'
 let userStore = useUserStore()
@@ -52,6 +55,7 @@ let userStore = useUserStore()
   width: 100%;
   background-color: $base-menu-color;
   .layout_slider {
+    color: white;
     width: $base-menu-width;
     height: 100vh;
     background-color: $base-menu-background;
@@ -70,7 +74,7 @@ let userStore = useUserStore()
     left: $base-menu-width;
     width: calc(100% - $base-menu-width);
     height: $base-tabbar-height;
-    background-color: cyan;
+    background-color: whitesmoke;
   }
   .layout_main {
     position: absolute;

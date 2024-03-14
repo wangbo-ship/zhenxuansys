@@ -2,8 +2,7 @@
   <div class="login_container">
     <el-row>
       <!-- :xs 设置水平小于768时的比例 -->
-      <el-col :span="12" :xs="0">
-      </el-col>
+      <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
         <el-form
           class="login_form"
