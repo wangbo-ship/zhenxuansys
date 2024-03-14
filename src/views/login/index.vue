@@ -97,7 +97,8 @@ const validatorUserName = (_rule: any, value: any, callback: any) => {
   //value:即为表单元素文本内容
   //函数:如果符合条件callBack放行通过即为
   //如果不符合条件callBack方法,注入错误提示信息
-  if (value.length >= 5) { //可以写成正则校验if(/^\d{5,10}$/.test(value))
+  if (value.length >= 5) {
+    //可以写成正则校验if(/^\d{5,10}$/.test(value))
     callback()
   } else {
     callback(new Error('账号长度至少五位'))
@@ -122,11 +123,11 @@ const rules = {
   //trigger:触发校验表单的时机 change->文本发生变化触发校验,blur:失去焦点的时候触发校验规则
   username: [
     // { required: true, min: 6, max: 10, message: '账号长度至少六位', trigger: 'change' }
-    {required: true, trigger: 'change', validator: validatorUserName },
+    { required: true, trigger: 'change', validator: validatorUserName },
   ],
   password: [
     // { required: true, min: 6, max: 15, message: '密码长度至少6位', trigger: 'change' }
-    {required: true, trigger: 'change', validator: validatorPassword },
+    { required: true, trigger: 'change', validator: validatorPassword },
   ],
 }
 // form盒子阴影

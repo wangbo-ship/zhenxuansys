@@ -1,3 +1,10 @@
+<!--
+ * @Author: wangbo
+ * @Date: 2024-03-11 15:11:04
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2024-03-14 10:44:11
+ * @Description: https://github.com/wangbo-ship/zhenxuansys
+-->
 <template>
   <div>
     <el-button type="primary" size="default" :icon="Plus">aaa</el-button>
@@ -32,6 +39,6 @@ onMounted(() => {
 #testColor {
   width: 100px;
   height: 100px;
-  background-color: $base-color;
+  background-color: $base-menu-color;
 }
 </style>

@@ -2,24 +2,25 @@
  * @Author: wangbo
  * @Date: 2024-03-08 21:06:05
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-08 23:24:33
- * @Description: https://github.com/wangbo-ship/zhenxuansys
+ * @LastEditTime: 2024-03-14 11:07:21
+ * @Description: 全局样式
  */
  
 //引入清除默认样式
 @import './reset.scss';
 
-//滚动条外观设置
-// ::-webkit-scrollbar {
-//     width: 10px;
-// }
-
-// ::-webkit-scrollbar-track {
-//     background: $base-menu-background;
-// }
-
-// ::-webkit-scrollbar-thumb{
-//     width: 10px;
-//     background-color: yellowgreen;
-//     border-radius: 10px;
-// }
+// 滚动条外观设置
+// 滚动条宽度
+::-webkit-scrollbar {
+    width: 10px;
+}
+// 滚动条背景色
+::-webkit-scrollbar-track {
+    background: $base-menu-background;
+}
+// 滚动条样式
+::-webkit-scrollbar-thumb{
+    width: 10px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+}
