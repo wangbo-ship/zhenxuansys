@@ -35,6 +35,7 @@ watch(
   },
 )
 </script>
+<!-- 起名字 开发者工具可以更清晰看到对应结构 -->
 <script lang="ts">
 export default {
   name: 'Main',

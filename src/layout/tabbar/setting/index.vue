@@ -21,7 +21,11 @@
 </template>
 
 <script lang="ts" setup></script>
-
+<script lang="ts">
+export default {
+  name: 'Setting',
+}
+</script>
 <style scoped>
 img {
   width: 34px;

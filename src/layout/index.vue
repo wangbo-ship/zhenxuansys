@@ -2,19 +2,23 @@
  * @Author: wangbo
  * @Date: 2024-03-13 16:27:48
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-14 21:46:30
+ * @LastEditTime: 2024-03-15 14:08:41
  * @Description: layout大框架
 -->
 <template>
   <div class="layout_container">
     <!-- 左侧菜单 -->
-    <div class="layout_slider">
+    <div
+      class="layout_slider"
+      :class="{ fold: layOutSettingStore.fold ? true : false }"
+    >
       <!-- logo组件 -->
       <Logo></Logo>
       <!-- 菜单滚动组件 -->
       <el-scrollbar class="scrollbar">
         <!-- 菜单组件 -->
         <el-menu
+          :collapse = "layOutSettingStore.fold ? true : false"
           background-color="rgb(52, 56, 60)"
           text-color="white"
           :default-active="$route.path"
@@ -25,11 +29,17 @@
       </el-scrollbar>
     </div>
     <!-- 头部导航 -->
-    <div class="layout_tabbar">
+    <div
+      class="layout_tabbar"
+      :class="{ fold: layOutSettingStore.fold ? true : false }"
+    >
       <Tabbar></Tabbar>
     </div>
     <!-- 展示区 -->
-    <div class="layout_main">
+    <div
+      class="layout_main"
+      :class="{ fold: layOutSettingStore.fold ? true : false }"
+    >
       <Main></Main>
     </div>
   </div>
@@ -42,11 +52,19 @@ import Menu from './menu/index.vue'
 import Main from './main/index.vue'
 import Tabbar from './tabbar/index.vue'
 //高亮用当前路由显示 route获取当前路由信息 :default-active="$route.path"刷新时依旧停留在当前路由
-import {useRoute} from 'vue-router'
+import { useRoute } from 'vue-router'
 let $route = new useRoute()
 //获取用户仓库
 import useUserStore from '@/store/modules/user'
 let userStore = useUserStore()
+//获取layout设置仓库
+import useLayOutSettingStore from '@/store/modules/setting'
+let layOutSettingStore = useLayOutSettingStore()
+</script>
+<script lang="ts">
+export default {
+  name: 'Layout',
+}
 </script>
 
 <style scoped lang="scss">
@@ -59,6 +77,7 @@ let userStore = useUserStore()
     width: $base-menu-width;
     height: 100vh;
     background-color: $base-menu-background;
+    transition: all 0.3s;
     .scrollbar {
       width: 100%;
       height: calc(100vh - $base-menu-logo-height);
@@ -66,6 +85,10 @@ let userStore = useUserStore()
         // 解决el-menu右边框问题
         border-right: none;
       }
+    }
+    // &.fold 表示在当前选择器下，追加一个 .fold 类，形成一个组合选择器 样式后覆盖前
+    &.fold {
+      width: $base-menu-min-width;
     }
   }
   .layout_tabbar {
@@ -75,6 +98,11 @@ let userStore = useUserStore()
     width: calc(100% - $base-menu-width);
     height: $base-tabbar-height;
     background-color: whitesmoke;
+    transition: all 0.3s;
+    &.fold {
+      width: calc(100vw - $base-menu-min-width);
+      left: $base-menu-min-width;
+    }
   }
   .layout_main {
     position: absolute;
@@ -85,6 +113,11 @@ let userStore = useUserStore()
     top: $base-tabbar-height;
     padding: 20px;
     overflow: auto;
+    transition: all 0.3s;
+    &.fold {
+      width: calc(100vw - $base-menu-min-width);
+      left: $base-menu-min-width;
+    }
   }
 }
 </style>

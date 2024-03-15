@@ -30,5 +30,7 @@
     "src/**/*.vue",
     "src/router/index.js"
   ],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  //告诉ts引入Node类型声明 支持.vue文件解析
+  "types":["node"]
 }
