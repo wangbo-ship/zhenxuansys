@@ -2,14 +2,14 @@
  * @Author: wangbo
  * @Date: 2024-03-14 20:17:14
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-14 20:44:23
+ * @LastEditTime: 2024-03-15 15:40:10
  * @Description: https://github.com/wangbo-ship/zhenxuansys
 -->
 <template>
-  <!-- 路由组件出口的位置 -->
+  <!-- 路由组件出口位置 实际就是roter-view 只不过加了动画 动画具体在css的fade中 -->
   <router-view v-slot="{ Component }">
     <transition name="fade">
-      <!-- 渲染layout一级路由组件的子路由 -->
+      <!-- 渲染layout一级路由组件的子路由 这里的Component是固定写法 -->
       <component :is="Component" v-if="flag" />
     </transition>
   </router-view>
@@ -29,6 +29,7 @@ watch(
   () => {
     //点击刷新按钮:路由组件销毁
     flag.value = false
+    //响应式数据发生变化 dom更新完毕后nextTick执行 再创建dom
     nextTick(() => {
       flag.value = true
     })

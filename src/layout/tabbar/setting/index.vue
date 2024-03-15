@@ -1,6 +1,6 @@
 <template>
   <!-- 操作栏 -->
-  <el-button type="primary" size="default" icon="Refresh" circle></el-button>
+  <el-button type="primary" size="default" icon="Refresh" circle @click="updateRefresh"></el-button>
   <el-button type="primary" size="default" icon="FullScreen" circle></el-button>
   <el-button type="primary" size="default" icon="Setting" circle></el-button>
   <img src="../../../../public/vite.svg" alt="" />
@@ -20,7 +20,14 @@
   </el-dropdown>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import useLayOutSettingStore from '../../../store/modules/setting';
+let layOutSettingStore = useLayOutSettingStore();
+//刷新按钮回调
+const updateRefresh = () =>{
+  layOutSettingStore.refsh = !layOutSettingStore.refsh;
+}
+</script>
 <script lang="ts">
 export default {
   name: 'Setting',

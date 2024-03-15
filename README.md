@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-08 01:41:59
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-15 14:14:22
+ * @LastEditTime: 2024-03-15 15:29:05
  * @Description: https://github.com/wangbo-ship/zhenxuansys
 -->
 
@@ -72,6 +72,13 @@
   - 引入仓库layoutsettingstore 共享开关状态
   - class="{ fold: layOutSettingStore.fold ? true : false }"
   - &.fold { width: $base-menu-min-width }
-  - transition: all 0.3s;-动画 
+  - transition: all 0.3s;-动画
   - el-menu上面设置折叠后悬浮显示路由collapse
 
+- 面包屑：
+  - 根据$route.matched来v-for渲染路由中的meta里的属性
+
+- 刷新按钮
+  - 本质：销毁对应的路由组件 然后重新创建(重新向服务器发请求渲染数据)
+  - 实现：组件a点击刷新的时候store中refsh取反 组件b监听store中的refsh变化并执行回调
+  - 用到nextTick：nextTick 方法接收一个回调函数作为参数，这个回调函数会在 DOM更新之后被调用

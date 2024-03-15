@@ -18,7 +18,7 @@
       <el-scrollbar class="scrollbar">
         <!-- 菜单组件 -->
         <el-menu
-          :collapse = "layOutSettingStore.fold ? true : false"
+          :collapse="layOutSettingStore.fold ? true : false"
           background-color="rgb(52, 56, 60)"
           text-color="white"
           :default-active="$route.path"

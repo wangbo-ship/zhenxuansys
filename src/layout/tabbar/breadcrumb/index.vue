@@ -14,7 +14,8 @@
     >
       <el-icon style="vertical-align: middle">
         <component v-if="item.meta.icon" :is="item.meta.icon"></component>
-        <component v-else is="Menu"></component> <!-- 使用默认图标组件 -->
+        <component v-else is="Menu"></component>
+        <!-- 使用默认图标组件 -->
       </el-icon>
       <span style="margin: 0 5px">{{ item.meta.title }}</span>
     </el-breadcrumb-item>
@@ -26,7 +27,7 @@
 import useLayOutSettingStore from '../../../store/modules/setting'
 //引入当前路由 控制面包屑
 import { useRoute } from 'vue-router'
-let $route = useRoute()  // console.log($route.matched)
+let $route = useRoute() // console.log($route.matched)
 let layOutSettingStore = useLayOutSettingStore()
 // 扩展图标的切换
 const changeIcon = () => {
