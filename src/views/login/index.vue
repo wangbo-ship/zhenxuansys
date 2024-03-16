@@ -51,13 +51,14 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import { ElNotification } from 'element-plus'
 import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import useUserStore from '@/store/modules/user'
 import { getTime } from '@/utils/time'
 //user仓库
 let userStore = useUserStore()
-//router
+//router和route
 let $router = useRouter()
+let $route = useRoute()
 //收集账号密码
 let loginForm = reactive({ username: 'admin', password: '111111' })
 //按钮加载变量
@@ -76,7 +77,10 @@ const login = async () => {
     //登陆成功
     //这里是那边的promise 所以也可以.then
     await userStore.userLogin(loginForm)
-    $router.push('/')
+    //判断有无query参数的重定向
+    let redirect = $route.query.redirect
+    //有redirect往redirect跳 无则跳首页
+    $router.push({ path: redirect || '/' })
     ElNotification({
       type: 'success',
       message: `${getTime()}好`,

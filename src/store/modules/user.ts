@@ -1,12 +1,12 @@
 //用户相关的小仓库
 import { defineStore } from 'pinia'
 //引入登录的api
-import { reqLogin } from '@/api/user/index'
+import { reqLogin,reqUserInfo } from '@/api/user/index'
 //引入数据类型
 import type { loginForm, loginResponseData } from '@/api/user/type'
 import type { UserState } from './types/type'
 //引入utils中存储数据的方法
-import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
+import { SET_TOKEN, GET_TOKEN,REMOVE_TOKEN } from '@/utils/token'
 //引入路由
 import { constantRoute } from '@/router/routes'
 //创建小仓库
@@ -18,6 +18,8 @@ let useUserStore = defineStore('User', {
       token: GET_TOKEN(),
       //路由表
       menuRoutes: constantRoute, //type.ts中定义了对应的路由对象的类型
+      username:'',
+      avatar:'',
     }
   },
   //异步 逻辑
@@ -43,6 +45,25 @@ let useUserStore = defineStore('User', {
         return Promise.reject(new Error(result.data.message))
       }
     },
+    //获取用户信息的方法
+    async userInfo(){
+      let result = await reqUserInfo();
+      if(result.code == 200){
+        // console.log("aaa",result)
+        this.username = result.data.checkUser.username
+        this.avatar = result.data.checkUser.avatar
+        return 'ok'
+      }else{
+        return Promise.reject('用户信息获取失败')
+      }
+    },
+    //退出登录的方法
+    userLogout(){
+      this.token = '';
+      this.username = '';
+      this.avatar = '';
+      REMOVE_TOKEN();
+    }
   },
   //计算属性
   getters: {},

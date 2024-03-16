@@ -23,6 +23,8 @@ import '@/styles/index.scss'
 import router from '@/router'
 //引入仓库
 import pinia from '@/store'
+//引入路由鉴权文件
+import './permission'
 // 获取vue实例
 const app = createApp(App)
 // app.use() 方法在 Vue 应用中通常用于注册插件、第三方库或者全局中间件
