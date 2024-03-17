@@ -19,7 +19,7 @@
   <!-- 下拉菜单 -->
   <el-dropdown>
     <span class="el-dropdown-link" style="font-size: 16px">
-      {{userStore.username}}
+      {{ userStore.username }}
       <el-icon class="el-icon--right">
         <arrow-down />
       </el-icon>
@@ -38,7 +38,7 @@ import useLayOutSettingStore from '../../../store/modules/setting'
 //引入user仓库
 import useUserStore from '../../../store/modules/user'
 //引入路由对象
-import { useRouter,useRoute } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 let layOutSettingStore = useLayOutSettingStore()
 let userStore = useUserStore()
 let $router = useRouter()
@@ -61,13 +61,13 @@ const fullScreen = () => {
   }
 }
 //退出登录回调
-const logout = () =>{
+const logout = async () => {
   //1.向服务器发送退出登录的接口请求
   //2.前端清除仓库中该用户相关的数据
   //3.跳转回登陆页
-  userStore.userLogout()
+  await userStore.userLogout()
   //下次登录时可以重定向到这次退出的页面
-  $router.push({path:'/login',query:{redirect:$route.path}})
+  $router.push({ path: '/login', query: { redirect: $route.path } })
 }
 </script>
 <script lang="ts">

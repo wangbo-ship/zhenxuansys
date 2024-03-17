@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-08 01:41:59
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-16 17:01:15
+ * @LastEditTime: 2024-03-17 22:55:41
  * @Description: https://github.com/wangbo-ship/zhenxuansys
 -->
 
@@ -81,23 +81,46 @@
   - 根据$route.matched来v-for渲染路由中的meta里的属性
 
 - 刷新按钮
+
   - 本质：销毁对应的路由组件 然后重新创建(重新向服务器发请求渲染数据)
   - 实现：组件a点击刷新的时候store中refsh取反 组件b监听store中的refsh变化并执行回调
   - 用到nextTick：nextTick 方法接收一个回调函数作为参数，这个回调函数会在 DOM更新之后被调用
 
 - 登录
-  - 业务：登录成功之后获取token存store中 在localstorage中也存一份 request的请求拦截每次从本地去除token放到请求头中 当请求其他接口时可以根据请求头中的token进行校验身份 
+
+  - 业务：登录成功之后获取token存store中 在localstorage中也存一份 request的请求拦截每次从本地去除token放到请求头中 当请求其他接口时可以根据请求头中的token进行校验身份
 
 - 退出
   退出时 $router.push({path:'/login',query:{redirect:$route.path}}) 携带一个退出时当前页面的path 下次登录的时候可以重定向到上次退出的页面
 
-- 路由守卫 permission.ts
-  1.全局前置守卫是指在路由切换之前触发的钩子函数，可以用来进行一些全局的前置操作，比如登录验证、权限控制等。
-  2.路由独享的守卫和组件内的守卫是针对具体路由或组件的，用于处理特定路由或组件的生命周期事件
+- 路由守卫 permission.ts 1.全局前置守卫是指在路由切换之前触发的钩子函数，可以用来进行一些全局的前置操作，比如登录验证、权限控制等。2.路由独享的守卫和组件内的守卫是针对具体路由或组件的，用于处理特定路由或组件的生命周期事件
   - 登录成功了就不能随意跳回登录页
   - 没登陆的时候不能随意进主页
   - 路由切换时用户信息丢失(因为路由切换会销毁state)
   - token过期情况
   - 路由切换时显示进度条 ---pnpm i nprogress
   - 路由鉴权
+
+- 配置代理跨域
+  let env = loadEnv(mode,process.cwd());
+  server: {
+      proxy: {
+        [env.VITE_APP_BASE_API]: {
+          //获取数据的服务器地址设置
+          target: env.VITE_SERVE,
+          //需要代理跨域
+          changeOrigin: true,
+          //路径重写
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        }
+      }
+    }
+
+- 关键是对业务逻辑的理解和细节的注意
+  - 上传注意：
+    - upload组件属性:action图片上传路径书写/api,代理服务器不发送这次post请求
+
+  - 添加和修改细节
+    - 根据响应式对象中传不传id来分辨dialog框的title是添加还是修改 虽然添加无需传id但每次点击添加的时候先清除对象 这里面还要包括id的清除（防止上次操作是修改 对象里面遗留了id）
+    - 添加前要清除上次表单校验的提示信息 需要用到el-form的clearValidate方法 但是刷新页面后第一次无法通过ref获取到el-form的实例 因为此时模板元素渲染到页面但可能并未挂载 所以第一次取到的实例可能是undefined 解决：nextTick
   

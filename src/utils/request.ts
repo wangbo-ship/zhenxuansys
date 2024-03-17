@@ -20,10 +20,10 @@ const request = axios.create({
 request.interceptors.request.use((config) => {
   //config配置对象,headers属性请求头,经常给服务器端携带公共参数
   //获取用户相关的仓库:获取仓库内部token,登录成功以后携带给服务器
-    const userStore = useUserStore()
-    if (userStore.token) {
-      config.headers.token = userStore.token
-    }
+  const userStore = useUserStore()
+  if (userStore.token) {
+    config.headers.token = userStore.token
+  }
 
   //最后必须返回配置对象
   return config

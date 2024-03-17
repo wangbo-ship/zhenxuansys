@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-13 16:27:48
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-15 14:08:41
+ * @LastEditTime: 2024-03-16 23:10:31
  * @Description: layout大框架
 -->
 <template>
@@ -108,7 +108,7 @@ export default {
     position: absolute;
     width: calc(100% - $base-menu-width);
     height: calc(100vh - $base-tabbar-height);
-    background-color: yellowgreen;
+    // background-color: yellowgreen;
     left: $base-menu-width;
     top: $base-tabbar-height;
     padding: 20px;
