@@ -5,7 +5,7 @@
  * @LastEditTime: 2024-03-16 20:22:32
  * @Description: https://github.com/wangbo-ship/zhenxuansys
  */
-import { defineConfig,loadEnv } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 //mock插件提供的方法
@@ -13,9 +13,9 @@ import { viteMockServe } from 'vite-plugin-mock'
 //引入svg需要的插件
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
-export default defineConfig(({ command,mode }) => {
+export default defineConfig(({ command, mode }) => {
   //获取各种开发环境下的环境变量
-  let env = loadEnv(mode,process.cwd());
+  let env = loadEnv(mode, process.cwd())
   return {
     plugins: [
       vue(),
@@ -54,8 +54,8 @@ export default defineConfig(({ command,mode }) => {
           //路径重写 将/api替换为空串 因为服务器地址前面都没有/api
           //  如果后端接口有/api那么重写就不需要了
           rewrite: (path) => path.replace(/^\/api/, ''),
-        }
-      }
-    }
+        },
+      },
+    },
   }
 })

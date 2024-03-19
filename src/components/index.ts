@@ -3,18 +3,18 @@
  * @Date: 2024-03-08 20:28:04
  * @LastEditors: Do not edit
  * @LastEditTime: 2024-03-14 16:58:25
- * @Description: 注册所有的全局组件
+ * @Description: 通过自定义事件注册所有的全局组件
  */
 
 //引入项目中全部的全局组件
 import SvgIcon from './SvgIcon/index.vue'
 import Pagination from './Pagination/index.vue'
-// import Category from './Category/index.vue'
+import Category from './Category/index.vue'
 import Test from './Test/index.vue'
 //引入element-plus提供全部图标组件
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
-const allGlobalComponent: any = { SvgIcon, Pagination, Test }
+const allGlobalComponent: any = { SvgIcon, Pagination,Category, Test }
 
 //对外暴露插件对象
 export default {

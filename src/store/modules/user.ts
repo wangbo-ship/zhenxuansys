@@ -36,7 +36,6 @@ let useUserStore = defineStore('User', {
       let result: loginResponseData = await reqLogin(data)
       //成功--存token
       if (result.code == 200) {
-
         //仓库存一下
         this.token = result.data as string
         //本地持久化存储一份
@@ -54,7 +53,7 @@ let useUserStore = defineStore('User', {
     },
     //获取用户信息的方法
     async userInfo() {
-      let result:userInfoReponseData = await reqUserInfo()
+      let result: userInfoReponseData = await reqUserInfo()
       if (result.code == 200) {
         // console.log("aaa",result)
         this.username = result.data.name

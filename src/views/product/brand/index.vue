@@ -299,7 +299,7 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
 ) => {
   //response:即为当前这次上传图片post请求服务器返回的数据(图片的服务器url)
   //收集上传图片的地址,添加一个新的品牌的时候带给服务器
-  console.log(response,uploadFile)
+  console.log(response, uploadFile)
   trademarkParams.logoUrl = response.data
   //图片上传成功,清除掉对应图片校验结果 clearValidate是api自带的方法
   formRef.value.clearValidate('logoUrl')
@@ -331,7 +331,6 @@ const removeTradeMark = async (id: number) => {
 onMounted(() => {
   getHasTrademark()
 })
-
 
 //品牌自定义校验规则方法
 const validatorTmName = (rule: any, value: any, callBack: any) => {

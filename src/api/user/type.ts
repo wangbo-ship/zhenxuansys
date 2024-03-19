@@ -34,6 +34,3 @@ export interface userInfoReponseData extends ResponseData {
     avatar: string
   }
 }
-
-
-

@@ -1,3 +1,11 @@
+/*
+ * @Author: wangbo
+ * @Date: 2024-03-16 16:12:42
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2024-03-18 01:49:11
+ * @Description: 路由守卫-鉴权
+ */
+
 //路由鉴权:鉴权,项目当中路由能不能被的权限的设置(某一个路由什么条件下可以访问、什么条件下不可以访问)
 import router from '@/router'
 import setting from './setting'
