@@ -4,63 +4,30 @@
       <!-- 添加品牌按钮 -->
       <!-- 卡片顶部添加品牌按钮 -->
       <!-- v-has="`btn.Trademark.add`" -->
-      <el-button
-        type="primary"
-        size="default"
-        icon="Plus"
-        @click="addTrademark"
-      >
-        添加品牌
-      </el-button>
+      <el-button type="primary" size="default" icon="Plus" @click="addTrademark">添加品牌</el-button>
       <!-- 表格 -->
       <!-- table:---border:可以设置表格纵向是否有边框
         table-column:---label:某一个列表 ---width:设置这列宽度 ---align:设置这一列对齐方式    
        -->
       <el-table style="margin: 10px 0" border :data="trademarkArr">
-        <el-table-column
-          label="序号"
-          width="100px"
-          align="center"
-          type="index"
-        ></el-table-column>
+        <el-table-column label="序号" width="100px" align="center" type="index"></el-table-column>
         <el-table-column label="品牌名称" prop="tmName">
           <template #="{ row, $index }">
             <!-- <pre> 标签内的文本会被浏览器保留其原有的格式，包括空白符（空格、制表符）和换行符，而不会像{{普通文本}}一样自动折行或忽略空白符。 -->
-            <pre style="color: rgb(64, 158, 255); font-weight: 900">{{
-              row.tmName
-            }}</pre>
+            <pre style="color: rgb(64, 158, 255); font-weight: 900">{{ row.tmName }}</pre>
           </template>
         </el-table-column>
         <el-table-column label="品牌LOGO">
           <template #="{ row, $index }">
             <!-- 这里数据库id=1的图没了 强迫症搞了自己的图 -->
-            <img
-              v-if="row.id != 1"
-              :src="row.logoUrl"
-              style="width: 100px; height: 100px"
-              alt=""
-            />
-            <img
-              v-else
-              src="../../../assets/images/error_images/xiaomi.png"
-              style="width: 100px; height: 100px"
-              alt=""
-            />
+            <img v-if="row.id != 1" :src="row.logoUrl" style="width: 100px; height: 100px" alt="" />
+            <img v-else src="../../../assets/images/error_images/xiaomi.png" style="width: 100px; height: 100px" alt="" />
           </template>
         </el-table-column>
         <el-table-column label="操作">
           <template #="{ row, $index }">
-            <el-button
-              type="primary"
-              icon="Edit"
-              @click="updateTrademark(row)"
-            ></el-button>
-            <el-popconfirm
-              :title="`您确定要删除${row.tmName}?`"
-              width="250px"
-              icon="Delete"
-              @confirm="removeTradeMark(row.id)"
-            >
+            <el-button type="primary" icon="Edit" @click="updateTrademark(row)"></el-button>
+            <el-popconfirm :title="`您确定要删除${row.tmName}?`" width="250px" icon="Delete" @confirm="removeTradeMark(row.id)">
               <template #reference>
                 <el-button type="danger" icon="Delete"></el-button>
               </template>
@@ -97,21 +64,10 @@
       v-model:属性用户控制对话框的显示与隐藏的 true显示 false隐藏
         title:设置对话框左上角标题 根据请求是否携带id来判断是修改(带id)还是添加
     -->
-    <el-dialog
-      v-model="dialogFormVisible"
-      :title="trademarkParams.id ? '修改品牌' : '添加品牌'"
-    >
-      <el-form
-        style="width: 80%"
-        :model="trademarkParams"
-        :rules="rules"
-        ref="formRef"
-      >
+    <el-dialog v-model="dialogFormVisible" :title="trademarkParams.id ? '修改品牌' : '添加品牌'">
+      <el-form style="width: 80%" :model="trademarkParams" :rules="rules" ref="formRef">
         <el-form-item label="品牌名称" label-width="100px" prop="tmName">
-          <el-input
-            placeholder="请您输入品牌名称"
-            v-model="trademarkParams.tmName"
-          ></el-input>
+          <el-input placeholder="请您输入品牌名称" v-model="trademarkParams.tmName"></el-input>
         </el-form-item>
         <el-form-item label="品牌LOGO" label-width="100px" prop="logoUrl">
           <!-- upload组件属性:action图片上传路径书写/api,代理服务器不发送这次post请求
@@ -119,18 +75,8 @@
              before-upload 上传文件之前的钩子 可以对文件类型进行约束（upload组件什么文件都可以上传）
              on-success 图片上传成功钩子 可传两个参数:图片地址和图片详细信息
             -->
-          <el-upload
-            class="avatar-uploader"
-            action="/api/admin/product/fileUpload"
-            :show-file-list="false"
-            :before-upload="beforeAvatarUpload"
-            :on-success="handleAvatarSuccess"
-          >
-            <img
-              v-if="trademarkParams.logoUrl"
-              :src="trademarkParams.logoUrl"
-              class="avatar"
-            />
+          <el-upload class="avatar-uploader" action="/api/admin/product/fileUpload" :show-file-list="false" :before-upload="beforeAvatarUpload" :on-success="handleAvatarSuccess">
+            <img v-if="trademarkParams.logoUrl" :src="trademarkParams.logoUrl" class="avatar" />
             <el-icon v-else class="avatar-uploader-icon">
               <Plus />
             </el-icon>
@@ -139,12 +85,8 @@
       </el-form>
       <!-- 具名插槽:footer -->
       <template #footer>
-        <el-button type="primary" size="default" @click="cancel">
-          取消
-        </el-button>
-        <el-button type="primary" size="default" @click="confirm">
-          确定
-        </el-button>
+        <el-button type="primary" size="default" @click="cancel">取消</el-button>
+        <el-button type="primary" size="default" @click="confirm">确定</el-button>
       </template>
     </el-dialog>
   </div>
@@ -154,16 +96,8 @@
 import { ElMessage, UploadProps, formEmits } from 'element-plus'
 //引入组合式API函数ref
 import { ref, onMounted, reactive, nextTick } from 'vue'
-import {
-  reqHasTrademark,
-  reqAddOrUpdateTrademark,
-  reqDeleteTrademark,
-} from '@/api/product/brand'
-import type {
-  Records,
-  TradeMarkResponseData,
-  TradeMark,
-} from '@/api/product/brand/type'
+import { reqHasTrademark, reqAddOrUpdateTrademark, reqDeleteTrademark } from '@/api/product/brand'
+import type { Records, TradeMarkResponseData, TradeMark } from '@/api/product/brand/type'
 //当前页码
 let pageNo = ref<number>(1)
 //每一页展示多少条数据
@@ -186,10 +120,7 @@ let formRef = ref()
 const getHasTrademark = async (pager = 1) => {
   //当前页码
   pageNo.value = pager
-  let result: TradeMarkResponseData = await reqHasTrademark(
-    pageNo.value,
-    limit.value,
-  )
+  let result: TradeMarkResponseData = await reqHasTrademark(pageNo.value, limit.value)
   if (result.code == 200) {
     //存储已有品牌总个数
     total.value = result.data.total
@@ -270,11 +201,7 @@ const confirm = async () => {
 const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
   //钩子是在图片上传成功之前触发,上传文件之前可以约束文件类型与大小
   //要求:上传文件格式png|jpg|gif 4M
-  if (
-    rawFile.type == 'image/png' ||
-    rawFile.type == 'image/jpeg' ||
-    rawFile.type == 'image/gif'
-  ) {
+  if (rawFile.type == 'image/png' || rawFile.type == 'image/jpeg' || rawFile.type == 'image/gif') {
     if (rawFile.size / 1024 / 1024 < 4) {
       return true
     } else {
@@ -293,10 +220,7 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
   }
 }
 //图片上传成功钩子
-const handleAvatarSuccess: UploadProps['onSuccess'] = (
-  response,
-  uploadFile,
-) => {
+const handleAvatarSuccess: UploadProps['onSuccess'] = (response, uploadFile) => {
   //response:即为当前这次上传图片post请求服务器返回的数据(图片的服务器url)
   //收集上传图片的地址,添加一个新的品牌的时候带给服务器
   console.log(response, uploadFile)
@@ -316,9 +240,7 @@ const removeTradeMark = async (id: number) => {
       message: '删除品牌成功',
     })
     //再次获取已有的品牌数据 删除后本页长度>1则留本页 否则返回上一页
-    getHasTrademark(
-      trademarkArr.value.length > 1 ? pageNo.value : pageNo.value - 1,
-    )
+    getHasTrademark(trademarkArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
   } else {
     ElMessage({
       type: 'error',

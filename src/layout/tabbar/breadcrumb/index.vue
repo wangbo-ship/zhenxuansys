@@ -6,12 +6,7 @@
   </el-icon>
   <!-- 面包屑 -->
   <el-breadcrumb separator-icon="ArrowRight">
-    <el-breadcrumb-item
-      v-for="item in $route.matched"
-      :key="item.path"
-      v-show="item.meta.title"
-      :to="item.path"
-    >
+    <el-breadcrumb-item v-for="item in $route.matched" :key="item.path" v-show="item.meta.title" :to="item.path">
       <el-icon style="vertical-align: middle">
         <component v-if="item.meta.icon" :is="item.meta.icon"></component>
         <component v-else is="Menu"></component>

@@ -93,15 +93,7 @@ onMounted(() => {
           //柱条颜色
           color: function (data: any) {
             //给每一个柱条这是背景颜色
-            let arr = [
-              'red',
-              'orange',
-              'yellowgreen',
-              'green',
-              'purple',
-              'hotpink',
-              'skyblue',
-            ]
+            let arr = ['red', 'orange', 'yellowgreen', 'green', 'purple', 'hotpink', 'skyblue']
             return arr[data.dataIndex]
           },
         },
@@ -151,15 +143,7 @@ onMounted(() => {
           //柱条颜色
           color: function (data: any) {
             //给每一个柱条这是背景颜色
-            let arr = [
-              'red',
-              'orange',
-              'yellowgreen',
-              'green',
-              'purple',
-              'hotpink',
-              'skyblue',
-            ]
+            let arr = ['red', 'orange', 'yellowgreen', 'green', 'purple', 'hotpink', 'skyblue']
             return arr[data.dataIndex]
           },
         },

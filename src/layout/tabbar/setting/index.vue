@@ -1,19 +1,7 @@
 <template>
   <!-- 操作栏 -->
-  <el-button
-    type="primary"
-    size="default"
-    icon="Refresh"
-    circle
-    @click="updateRefresh"
-  ></el-button>
-  <el-button
-    type="primary"
-    size="default"
-    icon="FullScreen"
-    circle
-    @click="fullScreen"
-  ></el-button>
+  <el-button type="primary" size="default" icon="Refresh" circle @click="updateRefresh"></el-button>
+  <el-button type="primary" size="default" icon="FullScreen" circle @click="fullScreen"></el-button>
   <el-button type="primary" size="default" icon="Setting" circle></el-button>
   <img :src="userStore.avatar" alt="" />
   <!-- 下拉菜单 -->

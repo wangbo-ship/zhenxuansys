@@ -8,38 +8,23 @@
 <template>
   <div class="layout_container">
     <!-- 左侧菜单 -->
-    <div
-      class="layout_slider"
-      :class="{ fold: layOutSettingStore.fold ? true : false }"
-    >
+    <div class="layout_slider" :class="{ fold: layOutSettingStore.fold ? true : false }">
       <!-- logo组件 -->
       <Logo></Logo>
       <!-- 菜单滚动组件 -->
       <el-scrollbar class="scrollbar">
         <!-- 菜单组件 -->
-        <el-menu
-          :collapse="layOutSettingStore.fold ? true : false"
-          background-color="rgb(52, 56, 60)"
-          text-color="white"
-          :default-active="$route.path"
-          active-text-color="#ffd04b"
-        >
+        <el-menu :collapse="layOutSettingStore.fold ? true : false" background-color="rgb(52, 56, 60)" text-color="white" :default-active="$route.path" active-text-color="#ffd04b">
           <Menu :menuList="userStore.menuRoutes"></Menu>
         </el-menu>
       </el-scrollbar>
     </div>
     <!-- 头部导航 -->
-    <div
-      class="layout_tabbar"
-      :class="{ fold: layOutSettingStore.fold ? true : false }"
-    >
+    <div class="layout_tabbar" :class="{ fold: layOutSettingStore.fold ? true : false }">
       <Tabbar></Tabbar>
     </div>
     <!-- 展示区 -->
-    <div
-      class="layout_main"
-      :class="{ fold: layOutSettingStore.fold ? true : false }"
-    >
+    <div class="layout_main" :class="{ fold: layOutSettingStore.fold ? true : false }">
       <Main></Main>
     </div>
   </div>

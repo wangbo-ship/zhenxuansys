@@ -15,31 +15,13 @@
         >
           <h1>Welcome</h1>
           <el-form-item prop="username">
-            <el-input
-              :prefix-icon="User"
-              v-model="loginForm.username"
-              @keyup.enter="login()"
-            ></el-input>
+            <el-input :prefix-icon="User" v-model="loginForm.username" @keyup.enter="login()"></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input
-              type="password"
-              :prefix-icon="Lock"
-              v-model="loginForm.password"
-              show-password
-              @keyup.enter="login()"
-            ></el-input>
+            <el-input type="password" :prefix-icon="Lock" v-model="loginForm.password" show-password @keyup.enter="login()"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button
-              type="primary"
-              size="default"
-              class="login_btn"
-              @click="login()"
-              :loading="loading"
-            >
-              登录
-            </el-button>
+            <el-button type="primary" size="default" class="login_btn" @click="login()" :loading="loading">登录</el-button>
           </el-form-item>
         </el-form>
       </el-col>

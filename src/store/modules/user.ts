@@ -10,11 +10,7 @@ import { defineStore } from 'pinia'
 //引入登录的api
 import { reqLogin, reqUserInfo, reqLogout } from '@/api/user/index'
 //引入数据类型
-import type {
-  loginFormData,
-  loginResponseData,
-  userInfoReponseData,
-} from '@/api/user/type'
+import type { loginFormData, loginResponseData, userInfoReponseData } from '@/api/user/type'
 import type { UserState } from './types/type'
 //引入utils中存储数据的方法
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
