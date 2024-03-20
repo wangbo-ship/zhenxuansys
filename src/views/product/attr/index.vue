@@ -14,8 +14,13 @@
         >
           添加属性
         </el-button>
-        
-        <el-table v-if="attrArr.length" border style="margin: 10px 0px" :data="attrArr">
+
+        <el-table
+          v-if="attrArr.length"
+          border
+          style="margin: 10px 0px"
+          :data="attrArr"
+        >
           <el-table-column
             label="序号"
             type="index"
@@ -31,7 +36,7 @@
             <template #="{ row, $index }">
               <el-tag
                 style="margin: 5px"
-                v-for="(item, index) in row.attrValueList"
+                v-for="item in row.attrValueList"
                 :key="item.id"
               >
                 {{ item.valueName }}
@@ -247,6 +252,15 @@ const save = async () => {
       type: 'success',
       message: attrParams.id ? '修改成功' : '添加成功',
     })
+    //解决一bug 每次修改之后 再进行添加 会发现并没有添加 而是把新加的内容覆盖了上次修改的地方
+    // 发现是修改之后 attrParams中的id残留了
+    // if(attrParams.id){
+    //   attrParams.id = undefined
+    // }
+    if (attrParams?.id !== undefined) {
+      delete attrParams.id;
+    }
+    console.log("id",attrParams.id)
     //获取全部已有的属性与属性值
     getAttr()
   } else {

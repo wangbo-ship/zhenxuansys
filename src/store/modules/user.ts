@@ -1,3 +1,10 @@
+/*
+ * @Author: wangbo
+ * @Date: 2024-03-12 11:36:47
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2024-03-20 14:37:58
+ * @Description: https://github.com/wangbo-ship/zhenxuansys
+ */
 //用户相关的小仓库
 import { defineStore } from 'pinia'
 //引入登录的api
@@ -25,7 +32,7 @@ let useUserStore = defineStore('User', {
       username: '',
       avatar: '',
       //存储当前用户是否包含某一个按钮
-      // buttons: [],
+      buttons: [],
     }
   },
   //异步 逻辑

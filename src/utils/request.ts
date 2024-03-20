@@ -2,14 +2,14 @@
  * @Author: wangbo
  * @Date: 2024-03-09 18:14:49
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-16 14:38:26
+ * @LastEditTime: 2024-03-20 14:28:47
  * @Description: axios二次封装 添加拦截器
  */
 import axios from 'axios'
-
 import { ElMessage } from 'element-plus'
 //引入用户相关的仓库
 import useUserStore from '@/store/modules/user'
+
 //第一步:利用axios对象的create方法,去创建axios实例(其他的配置:基础路径、超时的时间)
 const request = axios.create({
   //基础路径
@@ -24,7 +24,6 @@ request.interceptors.request.use((config) => {
   if (userStore.token) {
     config.headers.token = userStore.token
   }
-
   //最后必须返回配置对象
   return config
 })
