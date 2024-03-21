@@ -24,7 +24,9 @@
     <el-form-item label="销售属性">
       <el-form :inline="true">
         <el-form-item :label="item.saleAttrName" v-for="(item, index) in saleArr" :key="item.id">
-          <el-select v-model="item.saleIdAndValueId">
+            <!-- <el-option> 组件中的 :value 属性指定了每个选项的值（这里是键值对），将被收集到 item.saleIdAndValueId 中。
+                而 <el-option> 组件的 :label 属性指定了每个选项显示的内容，即页面的选项标签 -->
+            <el-select v-model="item.saleIdAndValueId">
             <el-option
               :value="`${item.id}:${saleAttrValue.id}`"
               v-for="(saleAttrValue, index) in item.spuSaleAttrValueList"
@@ -119,7 +121,7 @@ const cancel = () => {
 
 //设置默认图片的方法回调
 const handler = (row: any) => {
-  //点击的时候,全部图片的的复选框不勾选
+  //点击的时候,全部图片的的复选框不勾选(先清空 因为只能选一个)
   imgArr.value.forEach((item: any) => {
     table.value.toggleRowSelection(item, false)
   })
@@ -137,6 +139,8 @@ defineExpose({
 const save = async () => {
   //整理参数
   //平台属性
+  //reduce迭代函数 每次的结果都存在prev 然后prev与当前的next继续执行回调 最后默认返回最后一次结果
+  //后面的[]可以填写初始值 如果没写 默认数组的第一个是初始值(初始结果)
   skuParams.skuAttrValueList = attrArr.value.reduce((prev: any, next: any) => {
     if (next.attrIdAndValueId) {
       let [attrId, valueId] = next.attrIdAndValueId.split(':')
