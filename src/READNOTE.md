@@ -128,73 +128,71 @@
 
 ## - 第二:大屏可视化布局
 
-
 ## - 第三：权限和角色分配
-  - 业务：可以对用户进行增删改查和分配角色、可以增删改角色、可以设置角色访问和操作的权限
-  - 注意：
-    - 1.用户管理修改用户信息的时候 如果自己改自己要回退到登录 但是要手动刷新---再保存的时候window.location.reload()浏览器自动刷新一次 这个回退的逻辑再permisson.ts中 具体：全局前/后置守卫:项目当中任意路由切换都会触发的钩子 
-      - (1)首先检测token存在否 来判断用户是否登录 如果无Token则未登录 此时若访问登录页方行 若访问其他页面重定向到登录页 
-      - (2)如果token存在则用户登录了 此时直接放行到主页 然后判断是否存在用户信息 获取用户信息的api在路由守卫中进行 用户信息存在则放行 用户信息不存在则发送用户信息请求 如果得到则放行 如果得不到则token造假手动删除token然后重定向到登录
-    
-    - 2.角色管理中的角色权限分配是关键 通过树形控件进行控制 可以控制菜单的访问权限 也可以控制不同模块下不同按钮的操作权限---根据角色id获取该角色的权限信息(多维数组)前端展示第一层数组的name和内部children 
-      (1)显示勾选与否取决于select字段 根据select过滤出最内层的id(收集select为true的最内层的id)
-        过滤用到递归
-        const filterSelectArr = (allData: any, initArr: any) => {
-          allData.forEach((item: any) => {
-            if (item.select && item.level == 4) {
-                initArr.push(item.id);
-            }
-            if (item.children && item.children.length > 0) {
-                filterSelectArr(item.children, initArr);
-            }
-          })
-          return initArr;
-        }
-      (2)用户分配权限 首先获取tree组件实例 运用组件的api收集选中结点和半选父节点的id 将两个id合并成数组成为参数传递给后端 分配完之后要reload刷新更新当前菜单和权限(针对修改自己的权限情况)
 
-    - 3.核心重点：
-      (1)菜单权限与路由分析
-        
-      (2)按钮权限
+- 业务：可以对用户进行增删改查和分配角色、可以增删改角色、可以设置角色访问和操作的权限
+- 注意：
+
+  - 1.用户管理修改用户信息的时候 如果自己改自己要回退到登录 但是要手动刷新---再保存的时候window.location.reload()浏览器自动刷新一次 这个回退的逻辑再permisson.ts中 具体：全局前/后置守卫:项目当中任意路由切换都会触发的钩子
+    - (1)首先检测token存在否 来判断用户是否登录 如果无Token则未登录 此时若访问登录页方行 若访问其他页面重定向到登录页
+    - (2)如果token存在则用户登录了 此时直接放行到主页 然后判断是否存在用户信息 获取用户信息的api在路由守卫中进行 用户信息存在则放行 用户信息不存在则发送用户信息请求 如果得到则放行 如果得不到则token造假手动删除token然后重定向到登录
+  - 2.角色管理中的角色权限分配是关键 通过树形控件进行控制 可以控制菜单的访问权限 也可以控制不同模块下不同按钮的操作权限---根据角色id获取该角色的权限信息(多维数组)前端展示第一层数组的name和内部children
+    (1)显示勾选与否取决于select字段 根据select过滤出最内层的id(收集select为true的最内层的id)
+    过滤用到递归
+    const filterSelectArr = (allData: any, initArr: any) => {
+    allData.forEach((item: any) => {
+    if (item.select && item.level == 4) {
+    initArr.push(item.id);
+    }
+    if (item.children && item.children.length > 0) {
+    filterSelectArr(item.children, initArr);
+    }
+    })
+    return initArr;
+    }
+    (2)用户分配权限 首先获取tree组件实例 运用组件的api收集选中结点和半选父节点的id 将两个id合并成数组成为参数传递给后端 分配完之后要reload刷新更新当前菜单和权限(针对修改自己的权限情况)
+
+  - 3.核心重点：
+    (1)菜单权限与路由分析
+    (2)按钮权限
 
 ## - 第四：增删改查业务(数据的展示、处理和收集)
 
-  - 上传注意：
+- 上传注意：
 
-    - upload组件属性:action图片上传路径书写/api,代理服务器不发送这次post请求
+  - upload组件属性:action图片上传路径书写/api,代理服务器不发送这次post请求
 
-  - 添加和修改细节
+- 添加和修改细节
 
-    - 根据响应式对象中传不传id来分辨dialog框的title是添加还是修改 虽然添加无需传id但每次点击添加的时候先清除对象 这里面还要包括id的清除（防止上次操作是修改 对象里面遗留了id）
-    - 添加前要清除上次表单校验的提示信息 需要用到el-form的clearValidate方法 但是刷新页面后第一次无法通过ref获取到el-form的实例 因为此时模板元素渲染到页面但可能并未挂载 所以第一次取到的实例可能是undefined 解决：nextTick
+  - 根据响应式对象中传不传id来分辨dialog框的title是添加还是修改 虽然添加无需传id但每次点击添加的时候先清除对象 这里面还要包括id的清除（防止上次操作是修改 对象里面遗留了id）
+  - 添加前要清除上次表单校验的提示信息 需要用到el-form的clearValidate方法 但是刷新页面后第一次无法通过ref获取到el-form的实例 因为此时模板元素渲染到页面但可能并未挂载 所以第一次取到的实例可能是undefined 解决：nextTick
 
-  - 深浅拷贝
+- 深浅拷贝
 
-    - 浅拷贝Object.assign(obj1,obj2)拷贝的是地址 不同obj指向同一个地址
-    - 深拷贝obj2=JSON.parse(JSON.stringify(obj1)相当于两个对象独立 深层复制
+  - 浅拷贝Object.assign(obj1,obj2)拷贝的是地址 不同obj指向同一个地址
+  - 深拷贝obj2=JSON.parse(JSON.stringify(obj1)相当于两个对象独立 深层复制
 
-  - spu(类) sku(实例)---此模块主要是数据量比较大 本质还是何时发请求 数据的展示和收集问题
-    扩充一种传参方式 ：父组件中通过ref拿到子组件的实例 子组件中defineExpose()自己的方法和属性(默认setup语法糖是不暴露的) 然后父组件通过子组件实例调用子组件方法和属性 父可向子传参
-    补充另一种传参方式：v-model可以实现父子组件通信 子组件中要设置一个value属性
-    可说点1.用v-show来切换场景 这样父元素可以顺利拿到子组件的实例 因为他只是隐藏了
-    2.//路由组件销毁前，情况仓库关于分类的数据
-    onBeforeUnmount(() => {
-    categoryStore.$reset()
-    })
+- spu(类) sku(实例)---此模块主要是数据量比较大 本质还是何时发请求 数据的展示和收集问题
+  扩充一种传参方式 ：父组件中通过ref拿到子组件的实例 子组件中defineExpose()自己的方法和属性(默认setup语法糖是不暴露的) 然后父组件通过子组件实例调用子组件方法和属性 父可向子传参
+  补充另一种传参方式：v-model可以实现父子组件通信 子组件中要设置一个value属性
+  可说点1.用v-show来切换场景 这样父元素可以顺利拿到子组件的实例 因为他只是隐藏了
+  2.//路由组件销毁前，情况仓库关于分类的数据
+  onBeforeUnmount(() => {
+  categoryStore.$reset()
+  })
 
+# git的回退
 
-  # git的回退
+- #查看提交历史，找到要回退的提交的 SHA-1 标识符
+  git log
 
-  - #查看提交历史，找到要回退的提交的 SHA-1 标识符
-    git log
+  #回退到上一次提交，但保留更改
+  (这里是回退到上次 HEAD 指向最新的提交 HEAD^ 就指向倒数第二次提交。也可以回退到指定地方 那就把HEAD^改为标识符)
+  git reset --soft HEAD^
 
-    #回退到上一次提交，但保留更改
-    (这里是回退到上次 HEAD 指向最新的提交 HEAD^ 就指向倒数第二次提交。也可以回退到指定地方 那就把HEAD^改为标识符)
-    git reset --soft HEAD^
+  #更改提交消息
+  git commit --amend -m "新的提交消息"
 
-    #更改提交消息
-    git commit --amend -m "新的提交消息"
-
-    #强制推送更改的提交到远程仓库
-    (使用 git push --force 命令强制推送更改到远程仓库会覆盖远程仓库中的历史记录，可能会影响其他人的工作 解决：git push --force-with-lease，它会先检查远程分支是否与你本地分支同步，只有在本地分支落后于远程分支时才会执行强制推送)
-    git push --force
+  #强制推送更改的提交到远程仓库
+  (使用 git push --force 命令强制推送更改到远程仓库会覆盖远程仓库中的历史记录，可能会影响其他人的工作 解决：git push --force-with-lease，它会先检查远程分支是否与你本地分支同步，只有在本地分支落后于远程分支时才会执行强制推送)
+  git push --force

@@ -183,7 +183,7 @@ let $emit = defineEmits(['changeScene'])
 </script>
 
 <style scoped>
- :deep(.el-select){
+:deep(.el-select) {
   width: 200px;
- }
+}
 </style>

@@ -22,7 +22,9 @@ let layOutSettingStore = useLayOutSettingStore()
 //控制当前组件是否销毁重建
 let flag = ref(true)
 //监听仓库内部数据是否发生变化,如果发生变化，说明用户点击过刷新按钮
-watch(() => layOutSettingStore.refsh,() => {
+watch(
+  () => layOutSettingStore.refsh,
+  () => {
     //点击刷新按钮:路由组件销毁
     flag.value = false
     //响应式数据发生变化 dom更新完毕后nextTick执行 再创建dom
