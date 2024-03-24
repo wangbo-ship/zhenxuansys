@@ -24,9 +24,9 @@
     <el-form-item label="销售属性">
       <el-form :inline="true">
         <el-form-item :label="item.saleAttrName" v-for="(item, index) in saleArr" :key="item.id">
-            <!-- <el-option> 组件中的 :value 属性指定了每个选项的值（这里是键值对），将被收集到 item.saleIdAndValueId 中。
+          <!-- <el-option> 组件中的 :value 属性指定了每个选项的值（这里是键值对），将被收集到 item.saleIdAndValueId 中。
                 而 <el-option> 组件的 :label 属性指定了每个选项显示的内容，即页面的选项标签 -->
-            <el-select v-model="item.saleIdAndValueId">
+          <el-select v-model="item.saleIdAndValueId">
             <el-option
               :value="`${item.id}:${saleAttrValue.id}`"
               v-for="(saleAttrValue, index) in item.spuSaleAttrValueList"
@@ -182,4 +182,8 @@ const save = async () => {
 let $emit = defineEmits(['changeScene'])
 </script>
 
-<style scoped></style>
+<style scoped>
+ :deep(.el-select){
+  width: 200px;
+ }
+</style>

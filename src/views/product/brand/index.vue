@@ -255,7 +255,7 @@ onMounted(() => {
 })
 
 //品牌自定义校验规则方法
-const validatorTmName = (rule: any, value: any, callBack: any) => {
+const validatorTmName = (_rule: any, value: any, callBack: any) => {
   //是当表单元素触发blur时候,会触发此方法
   //自定义校验规则
   if (value.trim().length >= 2) {
@@ -266,7 +266,7 @@ const validatorTmName = (rule: any, value: any, callBack: any) => {
   }
 }
 //品牌LOGO图片的自定义校验规则方法
-const validatorLogoUrl = (rule: any, value: any, callBack: any) => {
+const validatorLogoUrl = (_rule: any, value: any, callBack: any) => {
   //如果图片上传
   if (value) {
     callBack()

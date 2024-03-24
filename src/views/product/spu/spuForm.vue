@@ -293,4 +293,8 @@ const initAddSpu = async (c3Id: number | string) => {
 defineExpose({ initHasSpuData, initAddSpu })
 </script>
 
-<style scoped></style>
+<style scoped>
+ :deep(.el-select){
+  width: 200px;
+ }
+</style>
