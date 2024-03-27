@@ -3,8 +3,8 @@
     <el-card>
       <!-- 添加品牌按钮 -->
       <!-- 卡片顶部添加品牌按钮 -->
-      <!-- v-has="`btn.Trademark.add`" -->
-      <el-button type="primary" size="default" icon="Plus" @click="addTrademark">添加品牌</el-button>
+      <!-- v-has="`btn.Trademark.add`"这里只测试这一个按钮权限 -->
+      <el-button type="primary" size="default" icon="Plus" @click="addTrademark" v-has="`btn.Trademark.add`">添加品牌</el-button>
       <!-- 表格 -->
       <!-- table:---border:可以设置表格纵向是否有边框
         table-column:---label:某一个列表 ---width:设置这列宽度 ---align:设置这一列对齐方式    

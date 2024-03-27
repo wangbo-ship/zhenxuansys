@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-08 01:41:59
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-25 10:39:41
+ * @LastEditTime: 2024-03-27 23:46:24
  * @Description: https://github.com/wangbo-ship/zhenxuansys
  */
 import { createApp } from 'vue'
@@ -41,5 +41,8 @@ app.use(globalComponent)
 app.use(router)
 //注册仓库
 app.use(pinia)
+//引入自定义指令文件
+import { isHasButton } from '@/directive/has'
+isHasButton(app)
 //挂载
 app.mount('#app')
