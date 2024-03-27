@@ -60,7 +60,7 @@ const login = async () => {
     //这里是那边的promise 所以也可以.then
     await userStore.userLogin(loginForm)
     //判断有无query参数的重定向
-    let redirect = $route.query.redirect
+    let redirect:any = $route.query.redirect
     //有redirect往redirect跳 无则跳首页
     $router.push({ path: redirect || '/' })
     ElNotification({

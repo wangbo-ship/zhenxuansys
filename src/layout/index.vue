@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-13 16:27:48
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-16 23:10:31
+ * @LastEditTime: 2024-03-28 00:19:07
  * @Description: layout大框架
 -->
 <template>
@@ -38,12 +38,15 @@ import Main from './main/index.vue'
 import Tabbar from './tabbar/index.vue'
 //高亮用当前路由显示 route获取当前路由信息 :default-active="$route.path"刷新时依旧停留在当前路由
 import { useRoute } from 'vue-router'
-let $route = new useRoute()
 //获取用户仓库
 import useUserStore from '@/store/modules/user'
-let userStore = useUserStore()
 //获取layout设置仓库
 import useLayOutSettingStore from '@/store/modules/setting'
+
+let $route = useRoute()
+
+let userStore = useUserStore()
+
 let layOutSettingStore = useLayOutSettingStore()
 </script>
 <script lang="ts">
