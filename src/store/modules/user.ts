@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-12 11:36:47
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-20 14:37:58
+ * @LastEditTime: 2024-03-27 23:22:24
  * @Description: https://github.com/wangbo-ship/zhenxuansys
  */
 //用户相关的小仓库
@@ -15,7 +15,25 @@ import type { UserState } from './types/type'
 //引入utils中存储数据的方法
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 //引入路由
-import { constantRoute } from '@/router/routes'
+import { constantRoute, asnycRoute, anyRoute } from '@/router/routes'
+//引入深拷贝方法
+//@ts-ignore
+import cloneDeep from 'lodash/cloneDeep'
+import router from '@/router'
+
+//用于过滤当前用户需要展示的异步路由的方法
+function filterAsyncRoute(asnycRoute: any, routes: any) {
+  return asnycRoute.filter((item: any) => {
+    if (routes.includes(item.name)) {
+      if (item.children && item.children.length > 0) {
+        //硅谷333账号:product\trademark\attr\sku
+        item.children = filterAsyncRoute(item.children, routes)
+      }
+      return true
+    }
+  })
+}
+
 //创建小仓库
 let useUserStore = defineStore('User', {
   //存储
@@ -54,19 +72,33 @@ let useUserStore = defineStore('User', {
         return Promise.reject(new Error(result.message))
       }
     },
+
     //获取用户信息的方法
     async userInfo() {
-      let result: userInfoReponseData = await reqUserInfo()
+      //获取用户信息进行存储仓库当中[用户头像、名字]
+      const result: userInfoReponseData = await reqUserInfo()
+      //如果获取用户信息成功，存储一下用户信息
       if (result.code == 200) {
-        // console.log("aaa",result)
         this.username = result.data.name
         this.avatar = result.data.avatar
-        // this.buttons = result.data.buttons
+        this.buttons = result.data.buttons
+        //计算当前用户需要展示的异步路由
+        const userAsyncRoute = filterAsyncRoute(
+          cloneDeep(asnycRoute),
+          result.data.routes,
+        )
+        //菜单需要的数据整理完毕
+        this.menuRoutes = [...constantRoute, ...userAsyncRoute, anyRoute]
+        //目前路由器管理的只有常量路由:用户计算完毕异步路由、任意路由动态追加
+        ;[...userAsyncRoute, anyRoute].forEach((route: any) => {
+          router.addRoute(route)
+        })
         return 'ok'
       } else {
-        return Promise.reject('用户信息获取失败')
+        return Promise.reject(new Error(result.message))
       }
     },
+
     //退出登录的方法
     async userLogout() {
       //退出登录请求

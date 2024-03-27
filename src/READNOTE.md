@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-08 01:41:59
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-27 22:11:15
+ * @LastEditTime: 2024-03-27 23:32:12
  * @Description: https://github.com/wangbo-ship/zhenxuansys
 -->
 
@@ -91,6 +91,7 @@
 - 登录
 
   - 业务：登录成功之后获取token存store中 在localstorage中也存一份 request的请求拦截每次从本地去除token放到请求头中 当请求其他接口时可以根据请求头中的token进行校验身份
+  （具体看：store下的user.ts）
 
 - 退出
   退出时 $router.push({path:'/login',query:{redirect:$route.path}) 携带一个退出时当前页面的path 下次登录的时候可以重定向到上次退出的页面
@@ -129,62 +130,64 @@
 - 总结：跨域、TS类型约束、全局/自定义组件和组件通信、git、部署上线、(布局方式、性能优化)
 
 ## - 第二:大屏可视化布局
+
 - 最重要的：适配问题
 - 解决方式：
   -1.c3的vw/wh(类似rem) 兼容IE8+ 但是vm vh不支持文字 文字只能px
   -2.c3的transform的scale()可以对元素进行放大缩小 缺点是左右上下可能留白 本项目用的scale方法
-    let screen = ref()
-    onMounted(() => {
-      screen.value.style.transform = `scale(${getScale()}) translate(-50%,-50%)`
-    })
-    //定义大屏缩放比例
-    function getScale(w = 1920, h = 1080) {
-      const ww = window.innerWidth / w
-      const wh = window.innerHeight / h
-      return ww < wh ? ww : wh
-    }
-    //监听视口变化
-    window.onresize = () => {
-      screen.value.style.transform = `scale(${getScale()}) translate(-50%,-50%)`
-    }
+  let screen = ref()
+  onMounted(() => {
+  screen.value.style.transform = `scale(${getScale()}) translate(-50%,-50%)`
+  })
+  //定义大屏缩放比例
+  function getScale(w = 1920, h = 1080) {
+  const ww = window.innerWidth / w
+  const wh = window.innerHeight / h
+  return ww < wh ? ww : wh
+  }
+  //监听视口变化
+  window.onresize = () => {
+  screen.value.style.transform = `scale(${getScale()}) translate(-50%,-50%)`
+  }
 - echarts
   - 获取实例容器
   - 配置项
-      //标题组件
-      title: {
-        text: '水球图',
-      },
-      //x|y轴组件
-      xAxis: {},
-      yAxis: {},
-      //系列:决定你展示什么样的图形图标
-      series: {
-        type: 'liquidFill', //系列
-        data: [0.6, 0.4, 0.2], //展示的数据
-        waveAnimation: true, //动画
-        animationDuration: 3,
-        animationDurationUpdate: 0,
-        radius: '100%', //半径
-        outline: {
-          //外层边框颜色设置
-          show: true,
-          borderDistance: 8,
-          itemStyle: {
-            color: 'skyblue',
-            borderColor: '#294D99',
-            borderWidth: 8,
-            shadowBlur: 20,
-            shadowColor: 'rgba(0, 0, 0, 0.25)',
-          },
-        },
-      },
-      //布局组件
-      grid: {
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
-      },
+    //标题组件
+    title: {
+    text: '水球图',
+    },
+    //x|y轴组件
+    xAxis: {},
+    yAxis: {},
+    //系列:决定你展示什么样的图形图标
+    series: {
+    type: 'liquidFill', //系列
+    data: [0.6, 0.4, 0.2], //展示的数据
+    waveAnimation: true, //动画
+    animationDuration: 3,
+    animationDurationUpdate: 0,
+    radius: '100%', //半径
+    outline: {
+    //外层边框颜色设置
+    show: true,
+    borderDistance: 8,
+    itemStyle: {
+    color: 'skyblue',
+    borderColor: '#294D99',
+    borderWidth: 8,
+    shadowBlur: 20,
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    },
+    },
+    },
+    //布局组件
+    grid: {
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    },
+
 ## - 第三：权限和角色分配
 
 - 业务：可以对用户进行增删改查和分配角色、可以增删改角色、可以设置角色访问和操作的权限
@@ -210,15 +213,15 @@
     (2)用户分配权限 首先获取tree组件实例 运用组件的api收集选中结点和半选父节点的id 将两个id合并成数组成为参数传递给后端 分配完之后要reload刷新更新当前菜单和权限(针对修改自己的权限情况)
 
   - 3.核心重点：
-    (1)菜单权限与路由分析
-      一、目前整个项目一共多少个路由
-        login(登录页面)、
-        404(404一级路由)、
-        任意路由、
-        首页(/home)、
-        数据大屏、
-        权限管理(三个子路由)
-        商品管理模块(四个子路由)
+    (1)路由分析
+    一、目前整个项目一共多少个路由
+    login(登录页面)、
+    404(404一级路由)、
+    任意路由、
+    首页(/home)、
+    数据大屏、
+    权限管理(三个子路由)
+    商品管理模块(四个子路由)
 
         1.1开发菜单权限
         ---第一步:拆分路由
@@ -231,21 +234,31 @@
 
         任意路由:任意路由
 
-        1.2菜单权限开发思路
-        admin在创建用户分配权限的时候 就相当于给用户信息的data里面添加了routes和buttons数组来标明该用户可以访问的菜单和按钮
-        根据routes对异步路由进行过滤 最后将过滤后的异步路由和常量路由合并
-        function filterAsyncRoute(asnycRoute, routes) {
-            return asnycRoute.filter(item => {
-                if (routes.includes(item.name)) {
-                    if (item.children && item.children.length > 0) {
-                        item.children = filterAsyncRoute(item.children, routes)
-                    }
-                    return true
-                }
-            })
-        }
+    (2)菜单权限
+      1.2菜单权限开发思路
+      admin在创建用户分配权限的时候 就相当于给用户信息的data里面添加了routes和buttons数组来标明该用户可以访问的菜单和按钮
+      根据routes对异步路由进行过滤 最后将过滤后的异步路由和常量路由合并
+      function filterAsyncRoute(asnycRoute, routes) {
+          return asnycRoute.filter(item => {
+              if (routes.includes(item.name)) {
+                  if (item.children && item.children.length > 0) {
+                      item.children = filterAsyncRoute(item.children, routes)
+                  }
+                  return true
+              }
+          })
+      }
+      注意两个问题 
+      1.第一是要对异步路由进行深拷贝 可以下载lodash(js常用的数组库)用cloneDeep方法 这样避免了下一个用户登录在过滤异步路由的时候是上一个用户过滤时残留的异步路由
+      之前在user的仓库的actions里面调用获取用户信息的api 在这里面成功获取信息之后 还要过滤当前用户的异步路由
+      let userAsyncRoute = filterAsyncRoute(cloneDeep(asyncRoute),result.data.routes)
+      过滤完毕之后 还要动态追加过滤后的动态路由和任意路由的注册(当前只注册了常量路由router/index.ts)
+      2.因为是动态追加注册的router.addRoute(route) 所以在异步路由的页面刷新可能出现白屏(因为还没有加载完毕就访问了)
+      解决这个问题 就在守卫permission中解决 如果有用户信息则next({...to})这种写法相当于加载完之后再方行
+        
     (2)按钮权限
-
+      
+      
 ## - 第四：增删改查业务(数据的展示、处理和收集)
 
 - 上传注意：

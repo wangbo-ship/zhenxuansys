@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-16 16:12:42
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-18 01:49:11
+ * @LastEditTime: 2024-03-27 22:49:45
  * @Description: 路由守卫-鉴权
  */
 
@@ -48,7 +48,7 @@ router.beforeEach(async (to: any, _from: any, next: any) => {
           await userStore.userInfo()
           //放行
           //万一:刷新的时候是异步路由,有可能获取到用户信息、异步路由还没有加载完毕,出现空白的效果
-          next()
+          next({...to})
         } catch (error) {
           //token过期:获取不到用户信息了
           //用户手动修改本地存储token

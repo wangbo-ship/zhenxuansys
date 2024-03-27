@@ -2,8 +2,8 @@
  * @Author: wangbo
  * @Date: 2024-03-11 14:00:50
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-12 23:13:08
- * @Description: https://github.com/wangbo-ship/zhenxuansys
+ * @LastEditTime: 2024-03-27 23:09:45
+ * @Description: 注册常量路由、设置切换路由动画、设置路由模式
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { constantRoute } from './routes'
