@@ -1,3 +1,10 @@
+<!--
+ * @Author: wangbo
+ * @Date: 2024-03-14 16:01:49
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2024-03-27 22:25:24
+ * @Description: 数据大屏
+-->
 <template>
   <div class="container">
     <!-- 数据大屏展示内容区域 -->

@@ -10,7 +10,9 @@
   <router-view v-slot="{ Component }">
     <transition name="fade">
       <!-- 渲染layout一级路由组件的子路由 这里的Component是固定写法 -->
-      <component :is="Component" v-if="flag" />
+      <div>
+        <component :is="Component" v-if="flag" />
+      </div>
     </transition>
   </router-view>
 </template>

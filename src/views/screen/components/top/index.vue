@@ -33,7 +33,7 @@ const goHome = () => {
 onMounted(() => {
   timer.value = setInterval(() => {
     time.value = moment().format('YYYY年MM月DD日 hh:mm:ss')
-  }, 1000)
+  }, 1000) as any
 })
 
 onBeforeUnmount(() => {

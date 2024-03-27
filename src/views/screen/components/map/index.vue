@@ -6,7 +6,7 @@
 import { ref, onMounted } from 'vue'
 import * as echarts from 'echarts'
 //引入中国地图的JSON数据
-import chinaJSON from './china.json'
+import * as chinaJSON from './china.json'
 //获取DOM元素
 let map = ref()
 //注册中国地图
@@ -20,10 +20,10 @@ onMounted(() => {
       map: 'china', //中国地图
       roam: true, //鼠标缩放的效果
       //地图的位置调试
-      left: 150,
+      left: 160,
       top: 150,
       right: 150,
-      zoom: 1.2,
+      zoom: 1,
       bottom: 0,
       //地图上的文字的设置
       label: {
@@ -43,24 +43,24 @@ onMounted(() => {
           colorStops: [
             {
               offset: 0,
-              color: 'red', // 0% 处的颜色
+              color: 'rgb(21,149,233)', // 0% 处的颜色
             },
             {
               offset: 1,
-              color: 'blue', // 100% 处的颜色
+              color: 'rgb(40,82,162)', // 100% 处的颜色
             },
           ],
           global: false, // 缺省为 false
         },
-        opacity: 0.8,
+        opacity: 0.6,
       },
       //地图高亮的效果
       emphasis: {
         itemStyle: {
-          color: 'red',
+          color: 'skyblue',
         },
         label: {
-          fontSize: 40,
+          fontSize: 20,
         },
       },
     },
@@ -78,7 +78,7 @@ onMounted(() => {
           {
             coords: [
               [116.405285, 39.904989], // 起点
-              [119.306239, 26.075302], // 终点
+              [110.306239, 34.075302], // 终点
             ],
             // 统一的样式设置
             lineStyle: {

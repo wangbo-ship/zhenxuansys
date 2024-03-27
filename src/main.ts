@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-08 01:41:59
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-11 15:31:21
+ * @LastEditTime: 2024-03-25 10:39:41
  * @Description: https://github.com/wangbo-ship/zhenxuansys
  */
 import { createApp } from 'vue'
@@ -25,6 +25,8 @@ import router from '@/router'
 import pinia from '@/store'
 //引入路由鉴权文件
 import './permission'
+//暗黑模式需要的样式
+import 'element-plus/theme-chalk/dark/css-vars.css'
 // 获取vue实例
 const app = createApp(App)
 // app.use() 方法在 Vue 应用中通常用于注册插件、第三方库或者全局中间件
