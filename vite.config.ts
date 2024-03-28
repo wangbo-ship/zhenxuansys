@@ -2,7 +2,7 @@
  * @Author: wangbo
  * @Date: 2024-03-08 01:41:59
  * @LastEditors: Do not edit
- * @LastEditTime: 2024-03-16 20:22:32
+ * @LastEditTime: 2024-03-28 14:44:40
  * @Description: https://github.com/wangbo-ship/zhenxuansys
  */
 import { defineConfig, loadEnv } from 'vite'
@@ -17,6 +17,7 @@ export default defineConfig(({ command, mode }) => {
   //获取各种开发环境下的环境变量
   let env = loadEnv(mode, process.cwd())
   return {
+    base: mode === 'production' ? './' : '/',
     plugins: [
       vue(),
       createSvgIconsPlugin({
